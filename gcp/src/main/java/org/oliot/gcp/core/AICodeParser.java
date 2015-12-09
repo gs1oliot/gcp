@@ -12,7 +12,7 @@ import java.util.HashMap;
  *         bjw0829@kaist.ac.kr, bjw0829@gmail.com
  */
 
-public class CodeParser {
+public class AICodeParser {
 
 	private HashMap<String, String> applicationIdentifierMap;
 	private HashMap<String, String> collection;

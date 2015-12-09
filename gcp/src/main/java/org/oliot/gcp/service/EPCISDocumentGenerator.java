@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.oliot.gcp.core.CodeParser;
+import org.oliot.gcp.core.AICodeParser;
 
 public class EPCISDocumentGenerator {
 	
@@ -12,7 +12,7 @@ public class EPCISDocumentGenerator {
 		HashMap<String, String> extensions) {
 		
 		// Parsing gs1 code
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		HashMap<String,String> collection = codeParser.parse(code, gcpLength);
 		if(collection == null){
 			return null;

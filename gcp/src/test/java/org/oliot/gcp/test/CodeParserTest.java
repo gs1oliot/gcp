@@ -2,7 +2,7 @@ package org.oliot.gcp.test;
 
 import java.util.HashMap;
 
-import org.oliot.gcp.core.CodeParser;
+import org.oliot.gcp.core.AICodeParser;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -30,7 +30,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSgtin() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String sgtin = "(01)80614141123458(21)6789";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(sgtin, gcpLength);
@@ -40,7 +40,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testLgtin() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String lgtin = "(01)80614141123458(10)6789";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(lgtin, gcpLength);
@@ -49,7 +49,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSgtinAndLgtin() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String slgtin = "(01)80614141123458(21)6789(10)4222";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(slgtin, gcpLength);
@@ -60,7 +60,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSgln() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String sgln = "(414)0614141123452(254)333";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(sgln, gcpLength);
@@ -69,7 +69,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSgtinAndLgtinAndSgln() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String slgtin = "(01)80614141123458(21)6789(10)4222(414)0614141123452(254)333";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(slgtin, gcpLength);
@@ -82,7 +82,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testExtraCode() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String extra = "(11)151201(13)151203(30)1(3104)000600(3930)41028000";
 		// Don't care GCP, insert any positive integer
 		HashMap<String, String> collection = codeParser.parse(extra, 1);
@@ -107,7 +107,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSscc() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String sscc = "(00)1 0614141 234567890 8";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(sscc, gcpLength);
@@ -116,7 +116,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testGsrn() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String gsrn = "(8018) 0614141 1234567890 2";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(gsrn, gcpLength);
@@ -125,7 +125,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testGsrnp() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String gsrnp = "(8017) 0614141 1234567890 2";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(gsrnp, gcpLength);
@@ -134,7 +134,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testGrai() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String grai = "(8003) 0 0614141 12345 2 32a/b";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(grai, gcpLength);
@@ -144,7 +144,7 @@ public class CodeParserTest extends TestCase {
 
 	public void testGiai() {
 		// Typo is identified in TDT GIAI XML
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String giai = "(8004) 0614141 32a/b";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(giai, gcpLength);
@@ -153,7 +153,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testGdti() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String gdti = "(253) 0614141 12345 2 006847";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(gdti, gcpLength);
@@ -162,7 +162,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testCpi() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String cpi = "(8010) 0614141 5PQ7/Z43 (8011) 12345";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(cpi, gcpLength);
@@ -171,7 +171,7 @@ public class CodeParserTest extends TestCase {
 	}
 
 	public void testSgcn() {
-		CodeParser codeParser = new CodeParser();
+		AICodeParser codeParser = new AICodeParser();
 		String sgcn = "(255) 4012345 67890 1 0";
 		int gcpLength = 7;
 		HashMap<String, String> collection = codeParser.parse(sgcn, gcpLength);
