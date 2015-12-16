@@ -20,6 +20,121 @@ public class AICodeParser {
 	/**
 	 * 
 	 * @param code
+	 *            GS1 AI and Element String contains unknown checksum as wild
+	 *            character (*)
+	 * @return e.g. (01)8061414112345* --> (01)80614141123458
+	 */
+	public String fillChecksum(String code, int gcpLength) {
+		// Null Check
+		if (code == null || gcpLength <= 0) {
+			return null;
+		}
+		// Keep code as HashMap
+		applicationIdentifierMap = parse(code);
+		// Initialize identifiedEPCMap
+		collection = new HashMap<String, String>();
+
+		// 00 formulate SSCC
+		if (applicationIdentifierMap.containsKey("00")) {
+			String sscc = applicationIdentifierMap.get("00");
+			sscc = sscc.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = sscc.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isSsccCheckDigitCorrect(temp)){
+					return "(00)"+temp;
+				}
+			}
+		}
+
+		// 01 formulate GTIN
+		if (applicationIdentifierMap.containsKey("01")) {
+			String gtin = applicationIdentifierMap.get("01");
+			gtin = gtin.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = gtin.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGtinCheckDigitCorrect(temp)){
+					return "(01)"+temp;
+				}
+			}
+		}
+
+		// 253 formulate GDTI
+		if (applicationIdentifierMap.containsKey("253")) {
+			String gdti = applicationIdentifierMap.get("253");
+			gdti = gdti.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = gdti.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGdtiCheckDigitCorrect(temp)){
+					return "(253)"+temp;
+				}
+			}
+		}
+
+		// 255 formulate SGCN
+		if (applicationIdentifierMap.containsKey("255")) {
+			String sgcn = applicationIdentifierMap.get("255");
+			sgcn = sgcn.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = sgcn.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isSgcnCheckDigitCorrect(temp)){
+					return "(255)"+temp;
+				}
+			}
+		}
+
+		// 414 ( SGLN without extension )
+		if (applicationIdentifierMap.containsKey("414")) {
+			String sgln = applicationIdentifierMap.get("414");
+			sgln = sgln.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = sgln.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGlnCheckDigitCorrect(temp)){
+					return "(414)"+temp;
+				}
+			}
+		}
+
+		// 8003 formulate GRAI
+		if (applicationIdentifierMap.containsKey("8003")) {
+			String grai = applicationIdentifierMap.get("8003");
+			grai = grai.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = grai.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGraiCheckDigitCorrect(temp)){
+					return "(8003)"+temp;
+				}
+			}
+		}
+
+		// 8017 formulate GSRNP
+		if (applicationIdentifierMap.containsKey("8017")) {
+			String gsrnp = applicationIdentifierMap.get("8017");
+			gsrnp = gsrnp.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = gsrnp.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGsrnCheckDigitCorrect(temp)){
+					return "(8017)"+temp;
+				}
+			}
+		}
+
+		// 8018 formulate GSRN
+		if (applicationIdentifierMap.containsKey("8018")) {
+			String gsrn = applicationIdentifierMap.get("8018");
+			gsrn = gsrn.replaceAll("\\s", "");
+			for(int i = 0 ; i < 10 ; i++){
+				String temp = gsrn.replace('*', String.valueOf(i).toCharArray()[0]);
+				if( isGsrnCheckDigitCorrect(temp)){
+					return "(8018)"+temp;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param code
 	 *            Sequence of ((GS1 Application Identifier) Element Strings)+
 	 *            e.g.
 	 *            (01)00037000302414(21)10419703(414)0003700030241(254)1041970

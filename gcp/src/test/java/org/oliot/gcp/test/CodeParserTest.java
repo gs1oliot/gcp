@@ -178,4 +178,93 @@ public class CodeParserTest extends TestCase {
 		System.out.println("[TEST]" + sgcn + " == " + collection.get("sgcn"));
 		assertTrue(collection.get("sgcn").equals("urn:epc:id:sgcn:4012345.67890.0"));
 	}
+	
+	public void testSsccChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String sscc = "(00)1 0614141 234567890 *";
+		int gcpLength = 7;
+		String filledSscc = codeParser.fillChecksum(sscc, gcpLength);
+		System.out.println("[TEST]" + sscc + "->" + filledSscc);
+		assertTrue(filledSscc.equals("(00)106141412345678908"));
+		HashMap<String, String> collection = codeParser.parse(filledSscc, gcpLength);
+		assertTrue(collection.get("sscc") != null);
+	}
+	
+	
+	public void testGtinChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String gtin = "(01)8061414112345*";
+		int gcpLength = 7;
+		String filledGtin = codeParser.fillChecksum(gtin, gcpLength);
+		System.out.println("[TEST]" + gtin + "->" + filledGtin);
+		assertTrue(filledGtin.equals("(01)80614141123458"));
+		HashMap<String, String> collection = codeParser.parse(filledGtin, gcpLength);
+		assertTrue(collection.get("gtin") != null);
+	}
+	
+	public void testGdtiChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String gdti = "(253) 0614141 12345 * 006847";
+		int gcpLength = 7;
+		String filledGdti = codeParser.fillChecksum(gdti, gcpLength);
+		System.out.println("[TEST]" + gdti + "->" + filledGdti);
+		assertTrue(filledGdti.equals("(253)0614141123452006847"));
+		HashMap<String, String> collection = codeParser.parse(filledGdti, gcpLength);
+		assertTrue(collection.get("gdti") != null);
+	}
+	
+	public void testSgcnChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String sgcn = "(255) 4012345 67890 * 0";
+		int gcpLength = 7;
+		String filledSgcn = codeParser.fillChecksum(sgcn, gcpLength);
+		System.out.println("[TEST]" + sgcn + "->" + filledSgcn);
+		assertTrue(filledSgcn.equals("(255)40123456789010"));
+		HashMap<String, String> collection = codeParser.parse(filledSgcn, gcpLength);
+		assertTrue(collection.get("sgcn") != null);
+	}
+	
+	public void testSglnChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String sgln = "(414)061414112345*";
+		int gcpLength = 7;
+		String filledSgln = codeParser.fillChecksum(sgln, gcpLength);
+		System.out.println("[TEST]" + sgln + "->" + filledSgln);
+		assertTrue(filledSgln.equals("(414)0614141123452"));
+		HashMap<String, String> collection = codeParser.parse(filledSgln, gcpLength);
+		assertTrue(collection.get("sgln") != null);
+	}
+	
+	public void testGraiChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String grai = "(8003) 0 0614141 12345 * 32a/b";
+		int gcpLength = 7;
+		String filledGrai = codeParser.fillChecksum(grai, gcpLength);
+		System.out.println("[TEST]" + grai + "->" + filledGrai);
+		assertTrue(filledGrai.equals("(8003)0061414112345032a/b"));
+		HashMap<String, String> collection = codeParser.parse(filledGrai, gcpLength);
+		assertTrue(collection.get("grai") != null);
+	}
+	
+	public void testGsrnChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String gsrn = "(8018) 0614141 1234567890 *";
+		int gcpLength = 7;
+		String filledGsrn = codeParser.fillChecksum(gsrn, gcpLength);
+		System.out.println("[TEST]" + gsrn + "->" + filledGsrn);
+		assertTrue(filledGsrn.equals("(8018)061414112345678902"));
+		HashMap<String, String> collection = codeParser.parse(filledGsrn, gcpLength);
+		assertTrue(collection.get("gsrn") != null);
+	}
+	
+	public void testGsrnpChecksum() {
+		AICodeParser codeParser = new AICodeParser();
+		String gsrn = "(8017) 0614141 1234567890 *";
+		int gcpLength = 7;
+		String filledGsrn = codeParser.fillChecksum(gsrn, gcpLength);
+		System.out.println("[TEST]" + gsrn + "->" + filledGsrn);
+		assertTrue(filledGsrn.equals("(8017)061414112345678902"));
+		HashMap<String, String> collection = codeParser.parse(filledGsrn, gcpLength);
+		assertTrue(collection.get("gsrnp") != null);
+	}
 }
