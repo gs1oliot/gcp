@@ -1,6 +1,3 @@
-### GS1 Code Parser ###
-Copyright (C) 2015 Jaewook Byun
-
 ### Introduction ###
 > GS1 Code Parser is a utility to deal with GS1 codes (e.g. GS1 Application Identifier, Hex-encoded RFID tag)
 
